@@ -78,19 +78,6 @@ void *gameOfLife(void *argumentos) {
                     continue;
                 }
 
-                // HIGHLIFE
-                // if (args->grid[i][j] == 0) { // Revive
-                //     if (alive == revive || alive == revive * 2) {
-                //         args->newGrid[i][j] = 1;
-
-                //         // Sessão crítica
-                //         pthread_mutex_lock(&alive_mutex);
-                //         currently_alive += 1;
-                //         pthread_mutex_unlock(&alive_mutex);
-                //         continue;
-                //     }
-                // }
-
                 args->newGrid[i][j] = 0;
 
                 if (args->grid[i][j] == 1) { // Morreu
