@@ -41,6 +41,8 @@ void gameOfLife(int **grid, int **newGrid) {
     int overpopulation = 4;
     int revive = 3;
     int temp = 0;
+    double inicial = omp_get_wtime();
+    int threads;
 
 #pragma omp parallel num_threads(THREADS)
     for (int e = 0; e < EPOCHS; e++) {
@@ -94,6 +96,10 @@ void gameOfLife(int **grid, int **newGrid) {
         }
 #pragma omp barrier
     }
+
+    double final = omp_get_wtime();
+    printf("Tempo game_of_life(): %.3f\n", final - inicial);
+    printf("Threads usados: %d\n", threads);
 }
 
 int main() {
