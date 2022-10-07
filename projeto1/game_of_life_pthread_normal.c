@@ -4,8 +4,9 @@
  * Miguel Silva Taciano
  */
 
-// Argumentos: -pthread -O3 -march=native -flto
+// Argumentos: -fopenmp -pthread -O3 -march=native -flto
 
+#include <omp.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -163,6 +164,7 @@ int main() {
 
     // Criando as threads para o game of life
     pthread_barrier_init(&barrier, NULL, THREADS);
+    double inicial = omp_get_wtime();
     for (int i = 0; i < THREADS; i++) {
         pthread_create(&threads[i].id, NULL, gameOfLife, (void *)&args[i]);
     }
@@ -171,7 +173,10 @@ int main() {
     for (int i = 0; i < THREADS; i++) {
         pthread_join(threads[i].id, NULL);
     }
+    double final = omp_get_wtime();
     pthread_barrier_destroy(&barrier);
+    printf("Tempo game_of_life(): %.3f\n", final - inicial);
+    printf("Threads usados: %d\n", THREADS);
 
     // Free nos 'malloc()'
     for (int i = 0; i < (int)SIZE; i++) {
