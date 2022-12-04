@@ -5,6 +5,7 @@
  */
 
 // Argumentos: -O3 -march=native -flto
+// Rodar: mpirun --hostfile hostfile -np <THREADS> <arquivo>
 
 #include <mpi.h>
 #include <stdio.h>
